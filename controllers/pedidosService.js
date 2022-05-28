@@ -15,12 +15,14 @@ const insertPedidos = (req, res) =>{
     productDao.insertPedidos(pedido,(data)=>{
         //console.log('data==> ',data)
         //si esta referenciado y ha sido afectado 1 fila
+        //Big O(n)
         if (data && data.affectedRows ===1){
             res.send({
                 status:true,
                 message: 'datos insertados exitosamente'
             })
         }else {
+            //Big O(n)
             res.send({
                 status: false,
                 message: 'Ocurrio un problema al insertar los datos'
@@ -34,6 +36,7 @@ const consultPedidos = (req, res) =>{
     console.log("Obteniendo Producto")
     productDao.consultPedidos((data)=>{
 
+        //Big O(n)
         if ( data != null){
             res.send({
                 status: true,
