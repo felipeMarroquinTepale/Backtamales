@@ -7,7 +7,7 @@ var router = express.Router();
 router.post('/registrarPedido', pedidoService.insertPedidos);
 
 //route para consultar los pedidos guardados
-router.get('/consultar', pedidoService.consultPedidos);
+router.get('/consultarPedidos', pedidoService.consultPedidos);
 
 
 module.exports = router;

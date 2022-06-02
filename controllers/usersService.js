@@ -1,17 +1,15 @@
 const userDAO = require('../models/usersDAO')
 
-
+//Metodo que sirve para validar si un usuario existe en la BD para el login
 //  request, response
 const userValidate = (req, res) => {
     //peticion get metodo que sirve para el login
-    let User = req.body.user
-    let Password = req.body.password
 
-
-    userDAO.findByUsername(req.params.User,req.params.Password,(data)=>{
+    userDAO.findByUsername(req.body.user,req.body.password,(data)=>{
         //Metodo callback retorma el valor del modelo UserDAO
 
         try{
+            //Big O(n)
             if(!data)throw new Err("Ups, algo salio mal. Si usted no tiene una cuenta cree una nueva")
             console.log('Data===>', data)
             res.send({  //Enviamos response
@@ -27,28 +25,30 @@ const userValidate = (req, res) => {
     })
 }
 
+//Metodo para registrar un cliente despues de realizar su pedido
 const  registrarClient = (req,res)=>{
-        const client={
-            Nombre: req.body.Nombre,
-            Apellidos: req.body.Apellidos,
-            Telefono: req.body.Telefono,
+    const client={
+        Nombre: req.body.Nombre,
+        Apellidos: req.body.Apellidos,
+        Telefono: req.body.Telefono,
+    }
+
+    //Mandamos a llamar el metodo insertClient del modelo
+    userDAO.insertClient(client,(data)=>{
+        console.log('data==> ',data)
+        //si esta referenciado y ha sido afectado 1 fila
+        if (data && data.affectedRows ===1){
+            res.send({
+                status:true,
+                message: 'datos insertados exitosamente'
+            })
+        }else {
+            res.send({
+                status: false,
+                message: 'Ocurrio un problema al insertar los datos'
+            })
         }
-        //Mandamos a llamar el metodo insertClient del modelo
-        userDAO.insertClient(client,(data)=>{
-            console.log('data==> ',data)
-            //si esta referenciado y ha sido afectado 1 fila
-            if (data && data.affectedRows ===1){
-                res.send({
-                    status:true,
-                    message: 'datos insertados exitosamente'
-                })
-            }else {
-                res.send({
-                    status: false,
-                    message: 'Ocurrio un problema al insertar los datos'
-                })
-            }
-        })
+    })
 }
 
 
