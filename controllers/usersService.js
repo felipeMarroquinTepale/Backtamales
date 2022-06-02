@@ -1,6 +1,6 @@
 const userDAO = require('../models/usersDAO')
 
-
+//Metodo que sirve para validar si un usuario existe en la BD para el login
 //  request, response
 const userValidate = (req, res) => {
     //peticion get metodo que sirve para el login
@@ -25,6 +25,7 @@ const userValidate = (req, res) => {
     })
 }
 
+//Metodo para registrar un cliente despues de realizar su pedido
 const  registrarClient = (req,res)=>{
     const client={
         Nombre: req.body.Nombre,

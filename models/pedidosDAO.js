@@ -2,6 +2,7 @@ const bd = require("../configMysql");
 
 module.exports = {
 
+    //metodo para insertar pedidos de cliente
     insertPedidos: (pedido,callback)=>{
         let sql = 'INSERT INTO pedido SET ?'
         bd.query(sql,pedido,(err,data)=>{
@@ -15,7 +16,7 @@ module.exports = {
         })
     },
 
-
+//Metodo para consultar pedidos
     consultPedidos : (callback) =>{
         let sql = 'SELECT * FROM pedido'
         bd.query(sql, (err, data) => {

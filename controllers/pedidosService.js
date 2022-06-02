@@ -1,7 +1,7 @@
 const productDao = require("../models/pedidosDAO")
 
+//Este metodo inserta pedidos de los clientes
 const insertPedidos = (req, res) =>{
-
     const pedido={
         Idcliente: req.body.Idcliente,
         Nombre: req.body.Nombre,
@@ -31,8 +31,8 @@ const insertPedidos = (req, res) =>{
     })
 }
 
+//Este metodo consulta pedidos de los clientes para el administrador
 const consultPedidos = (req, res) =>{
-
     console.log("Obteniendo Producto")
     productDao.consultPedidos((data)=>{
 
